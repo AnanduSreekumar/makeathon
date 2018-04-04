@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+ <link class=" org       anz-circle" rel="icon" href="img/logo.png">   
+<title>Smart House Automation</title>
+<style>
+   
+body::-webkit-scrollbar {
+    width: 0.4em;
+      background-color: rgb(0, 0, 0);
+}
+ .color{
+        background-color:red;
+    } 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+ 
+  background-color: red;
+  outline: 1px solid #0677e8;
+}    
+.menu {
+  cursor: pointer;
+  margin: 0 auto;
+padding-left: 1.25em;
+  position: relative;
+  width:40px;
+  height:40px;
+}
+.menu-global {
+  backface-visibility: hidden;
+  position: absolute;
+  left: 0;
+  border-top: 4px solid black;
+  width: 100%;
+  transition: 0.55s;
+}
+.menu-top {
+  top: 10px;
+}
+.menu-middle {
+  top: 20px;
+}
+.menu-bottom {
+  top: 30px;
+}
+.menu-top-click {
+  backface-visibility: hidden;
+  top: 15px;
+  transform: rotate(50deg);
+  transition: 0.55s 0.5s;
+}
+.menu-middle-click {
+  opacity: 0;
+}
+.menu-bottom-click {
+  backface-visibility: hidden;
+  top: 15px;
+  transform: rotate(-410deg);
+  transition: 0.55s 0.5s;
+}        
+.anz-hover-opacity {cursor: pointer;}  
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+footer,nav{display:block}
+video{display:inline-block}
+a{background-color:transparent;-webkit-text-decoration-skip:objects}
+a:active,a:hover{outline-width:0}img{border-style:none}
+button,input{font:inherit;margin:0}
+button,input{overflow:visible}button{text-transform:none}
+button,[type=submit]{-webkit-appearance:button}
+button::-moz-focus-inner, [type=submit]::-moz-focus-inner{border-style:none;padding:0}
+button:-moz-focusring, [type=submit]:-moz-focusring{outline:1px dotted ButtonText}
+::-webkit-input-placeholder{color:inherit;opacity:0.54}
+::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
+/* End extract */
+html,body{font-family:Roboto,sans-serif;font-size:15px;line-height:1.5}html{overflow-x:hidden}
+h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}
+h1,h2,h3{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}
+.anz-image{max-width:100%;height:auto}img{margin-bottom:-5px}a{color:inherit}
+.anz-button{border:none;display:inline-block;outline:0;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+.anz-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}   
+.anz-button:disabled{cursor:not-allowed;opacity:0.3}:disabled *{pointer-events:none}
+.anz-tag{background-color:#000;color:#fff;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}
+.anz-tooltip,.anz-display-container{position:relative}.anz-tooltip .anz-text{display:none}.anz-tooltip:hover .anz-text{display:inline-block}
+.anz-input{padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%}
+.anz-dropdown-hover{position:relative;display:inline-block;cursor:pointer}
+.anz-dropdown-hover:hover .anz-dropdown-content{display:block;z-index:1}
+.anz-dropdown-hover:hover > .anz-button:first-child{background-color:#ccc;color:#000}
+.anz-dropdown-content{cursor:auto;color:#000;background-color:#fff;display:none;position:absolute;min-width:160px;margin:0;padding:0}
+.anz-sidebar{height:100%;width:200px;background-color:#fff;position:fixed!important;z-index:1;overflow:auto}
+.anz-modal{z-index:3;display:none;padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)}
+.anz-modal-content{margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
+.anz-bar{width:100%;overflow:hidden}
+.anz-bar .anz-bar-item{padding:8px 16px;float:left;width:auto;border:none;outline:none;display:block}
+.anz-bar .anz-dropdown-hover{position:static;float:left}
+.anz-bar .anz-button{white-space:normal}
+.anz-bar-block .anz-bar-item{width:100%;display:block;padding:8px 16px;text-align:left;border:none;outline:none;white-space:normal;float:none}
+.anz-container:after,.anz-container:before,.anz-row:after,.anz-row:before,.anz-row-padding:after,.anz-row-padding:before,.anz-bar:before,.anz-bar:after{content:"";display:table;clear:both}
+.anz-col,.anz-half,.anz-quarter{float:left;width:100%}
+@media (min-width:601px){.anz-col.m3,.anz-quarter{width:24.99999%}.anz-col.m6,.anz-half{width:49.99999%}}
+@media (min-width:993px){.anz-col.l3{width:24.99999%}}
+.anz-content{max-width:980px;margin:auto}.anz-cell{display:table-cell}
+@media (max-width:600px){.anz-modal-content{margin:0 10px;width:auto!important}.anz-modal{padding-top:30px}	
+.anz-hide-small{display:none!important}}
+@media (max-width:768px){.anz-modal-content{width:500px}.anz-modal{padding-top:50px}}
+@media (min-width:993px){.anz-modal-content{width:900px}.anz-hide-large{display:none!important}}
+@media (max-width:992px) and (min-width:601px){.anz-hide-medium{display:none!important}}
+.anz-top{position:fixed;width:100%;z-index:1}.anz-top{top:0}
+.anz-display-topleft{position:absolute;left:0;top:0}.anz-display-topright{position:absolute;right:0;top:0}
+.anz-display-bottomleft{position:absolute;left:0;bottom:0}
+.anz-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+.anz-display-right{position:absolute;top:50%;right:0%;transform:translate(0%,-50%);-ms-transform:translate(0%,-50%)}
+.anz-circle{border-radius:50%}
+.anz-row-padding,.anz-row-padding>.anz-col{padding:0 8px}
+.anz-container{padding:0.01em 16px}
+.anz-card{box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
+.anz-card-4{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
+.anz-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.anz-animate-top{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+.anz-animate-left{position:relative;animation:animateleft 0.4s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+.anz-animate-right{position:relative;animation:animateright 0.4s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.anz-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
+.anz-opacity,.anz-hover-opacity:hover{opacity:0.60}.anz-opacity-min{opacity:0.75}
+.anz-grayscale{filter:grayscale(75%)}.anz-large{font-size:18px!important}
+.anz-xlarge{font-size:24px!important}.anz-xxlarge{font-size:36px!important}.anz-center{text-align:center!important}.anz-border{border:1px solid #ccc!important}.anz-border-bottom{border-bottom:1px solid #ccc!important}
+.anz-section{margin-top:16px!important;margin-bottom:16px!important}.anz-margin-top{margin-top:16px!important}.anz-margin-bottom{margin-bottom:16px!important}.anz-padding{padding:8px 16px!important}.anz-padding-large{padding:12px 24px!important}
+.anz-padding-16{padding-top:16px!important;padding-bottom:16px!important}
+.anz-padding-32{padding-top:32px!important;padding-bottom:32px!important}
+.anz-padding-64{padding-top:64px!important;padding-bottom:64px!important}.anz-right{float:right!important}
+.anz-button:hover{color:#000!important;background-color:#ccc!important}
+.anz-transparent{background-color:transparent!important}
+#splash {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+z-index: 10;
+    display: block;
+}
+
+body, html {
+    height: 100%;
+     width:100%; 
+    color:#212121;
+    background-color:#FAFAFA;
+   zoom: 100%;
+    
+}
+div:not(.org  .sweet-alert)  {
+        display: none !important;
+    }
+a[href*="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website_projectaquatech&utm_content=footer_img"] img[src*="https://cdn.rawgit.com/000webhost/logo/e9bd13f7/footer-powered-by-000webhost-white2.png"] {
+  display: none !important;
+}         
+/* Create a Parallax Effect */
+    .chemicalinfo div{border-style: solid;}
+ .anz-red{color:#fff!important;background-color:#f44336!important}
+/* First image (Logo. Full height) */
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+    background-image: url("../img/image.jpg");
+    min-height: 400px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+    background-image: url("../img/productcover.jpg");
+    min-height: 400px;
+}
+ .anz-display-bottomright{position:absolute;right:0;bottom:0}   
+/* Colors */
+.anz-red{color:#fff!important;background-color:#f44336!important}
+.anz-white{color:#000!important;background-color:#fff!important}
+.anz-black{color:#fff!important;background-color:#000!important}
+.anz-text-white{color:#fff!important}
+.anz-border-white{border-color:#fff!important}
+.anz-border-black{border-color:#000!important}  
+
+</style>
+
+</head>
+
+<body style="font-family:Roboto,sans-serif;">
+<div id="home" class=" org      " style="width:100%; height:100%; ">
+<nav class=" org       anz-sidebar anz-bar-block  anz-card anz-animate-left  " style="width:30%; background-color:#FAFAFA; color:#212121;  display:none;" id="mySidebar">
+  
+    <button   class=" org        anz-bar-item  anz-large anz-padding-16" style="color:#212121; background-color: #FAFAFA;"><b>Be Safe! Know Your Problem!</b></button>
+    <hr style="background-color: #212121;"/>
+<p  id="know">
+    
+    </p>
+</nav>    
+<div class=" org  anz-wide anz-card" style="width:inherit; background-color:#3F51B5; color:#FAFAFA; 
+  height:8%;width:100%;  ">
+    <div class=" org  anz-left " style="width:100%;height:inherit; ">
+    <center>   
+    <form class=" org  " action="" method="">
+    
+     <div class=" org  anz-left anz-button" id="sub" style="font-size: 20px;width:500px;" onclick="showdata()"> SMART HOUSE AUTOMATION </div>    
+</form>
+        </center>
+    </div>
+  <div class=" org  anz-right barr"  style="height:inherit; display:none;   width:15%; ">
+          
+     <a href="javascript:void(0)" class=" org       anz-right  anz-bar-item anz-padding " style="padding:1px;" onclick="anz_open()">
+      <div class=" org  menu  " style="padding:20px;padding-right:0px;padding-top:20px;  margin:0px;">
+  <span class=" org  menu-global menu-top"></span>
+  <span class=" org  menu-global menu-middle"></span>
+  <span class=" org  menu-global menu-bottom"></span>
+</div>
+    </a>
+    </div>
+</div>
+   <div id="splash" style="width:100%;margin-top:3%;  height:94%;background-color:white;">
+
+    <img class=" org  anz-display-middle"src="img/logo.png" height="700" width="700" />
+       <p class=" org  anz-display-bottomright"><b> Made with <span style="color:red;">&#x2764; </span>for Makeathon from Blacklotus .</b> </p>   
+  </div> 
+<div style="width:inherit; height:47%; ">
+    <div class=" org  "  style="float:left;  width:50%; height:100%;   "> <div id="chartContainer" style="width:90%; height:90%;padding:10px; "></div></div>
+    <div id="ma" style="float:right;  width:50%; height:100%;   ">        
+  
+<iframe src="https://maps.mapwize.io/#/p/biomerieux/business_room_16?k=VNgCDBlokjqrS5oF&u=default_universe&l=en&z=21" height="100%" width="100%" style="padding-top: 0px; "></iframe> </div>
+    </div>
+    
+<div class=" org  chemicalinfo" style="width:100%; height:45%; " id="">
+<div style="height:100%; width:40%;float:left;">
+      <div class=" org  "style="height:100%;width:50%; float:left; ">
+        <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>SMART DUST BIN</center></div>    
+    <div class="dustcolor org  "style="background-color:#ffffff;height:75%;width:100%; float:left; ">
+        <center> <img class="dustpic anz-circle anz-green org "src="img/full-trash.png" style="width:200px; height:250px; " /></center></div>
+  <div class=" org  "style="height:15%;width:100%; float:left; ">
+      <center> <input class="dust" type='button'  style="height:20px;width:100px;   background-color: transparent; border:0px; color:black; " value='Empty '  ></center></div></div>
+     <div class=" org  "style="height:100%;width:50%; float:right; ">
+        <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>SECURITY</center></div>    
+    <div class="personcolor org  "style="background-color:#ffffff;height:75%;width:100%; float:left; ">
+        <center> <img class="personpic anz-circle anz-green org "src="img/no.png" style="width:200px; height:200px; " /></center></div>
+  <div class=" org  "style="height:15%;width:100%; float:left; ">
+      <center> <input class="person" type='button'  style="height:20px;width:100px;   background-color: transparent; border:0px; color:black; " value='No one '  ></center></div></div>
+    </div>
+  <div style="height:100%; width:40%;float:left; ">
+      <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>ACTIVE APPLIANCE</center></div>    
+         <div class=" org  "style="height:90%;width:50%; float:left; ">
+        <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>BULB</center></div>    
+    <div class="bulbstatus org  "style="background-color:#ffffff;height:75%;width:100%; float:left; ">
+        <center> <img class=" anz-circle anz-green org "src="img/bulb.png" style="width:180px; height:200px; " /></center></div>
+  <div class="bulbcol org  "style="background-color:aliceblue;  height:15%;width:100%; float:left; ">
+      <center> <input class="bulbpower" type='button'  style="height:20px;width:100px;   background-color: transparent; border:0px; color:black; " value='--- '  ></center></div></div>  
+     <div class=" org  "style="height:90%;width:50%; float:left; ">
+        <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>FAN</center></div>    
+    <div class="fanstatus org  "style="background-color:#ffffff;height:75%;width:100%; float:left; ">
+        <center> <img class=" anz-circle anz-green org "src="img/fan.png" style="width:200px; height:200px; " /></center></div>
+  <div class=" org  "style="height:15%;width:100%; float:left; ">
+      <center> <input class="fanpower" type='button'  style="height:20px;width:70px;   background-color: transparent; border:0px; color:black; " value='--- '  ></center></div></div> 
+   
+    </div>
+   <div class=" org  "style="height:100%;width:20%; float:left; ">
+        <div class=" org  anz-wide anz-black" style="width:100%; height:10%;"> <center>SMART MONITORING</center></div>    
+    <div class="smartstatus org  " onclick=""style="background-color:#ffffff;height:75%;width:100%; float:left; ">
+        <center> <img class="smart anz-circle anz-green org " src="img/sheild.png" style="width:200px; height:200px; " /></center></div>
+  <div class=" org  "style="height:15%;width:100%; float:left; ">
+      <center> <input class="smartvalue" type='button'  style="height:20px;width:70px;   background-color: transparent; border:0px; color:black; " value='0'  ></center></div></div>
+    </div> 
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgORwAnPqRX8lQ42sfJ_Z2VB  XsS_8ZNSQ",
+    authDomain: "makeathon-picam.firebaseapp.com",
+    databaseURL: "https://makeathon-picam.firebaseio.com",
+    projectId: "makeathon-picam",
+    storageBucket: "makeathon-picam.appspot.com",
+    messagingSenderId: "481701924874"
+  };
+  firebase.initializeApp(config);
+</script>
+   <script type="text/javascript">
+        window.onload = function() {
+            var dps = []; //dataPoints. 
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "Power Usage"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps
+                }]
+            });
+
+          firebase.database().ref('bulb/power/').on('value', function(snapshot) {
+                xValue = xValue+1;
+                yValue = ((parseInt(snapshot.val().toString))%(yVal*60*60));
+                dps.push({
+                    x: xValue,
+                    y: yValue
+                });
+                chart.render();
+            });
+
+           
+        }
+    </script>
+    
+<script>
+var starCountRef = firebase.database().ref('neural_net_res/');
+var n;
+starCountRef.on('value', function(snapshot) {
+n=snapshot.val();
+ $( ".person" ).attr('value', n );
+if(snapshot.val()=="INTRUDER"){
+    $( ".personpic" ).attr('src','img/theif.png' );
+     $( ".personcolor" ).css('background-color','#ff0000');
+}
+else{
+    $( ".personpic" ).attr('src','img/owner.png' );
+      $( ".personcolor" ).css('background-color','#ffffff');
+}       
+});
+ 
+       
+</script> 
+<script>
+
+firebase.database().ref('dustbin/').on('value', function(snapshot) {
+var a = snapshot.val();
+ $( ".dust" ).attr('value', a);
+if(snapshot.val()=="FULL"){
+    $( ".dustpic" ).attr('src','img/full-trash.png' );
+     $( ".dustcolor" ).css('background-color','#ff0000');
+}
+else if(snapshot.val()>="HALF"){
+    $( ".dustpic" ).attr('src','img/empty-trash.png' );
+      $( ".dustcolor" ).css('background-color','#ffc453');
+}    
+    else{
+        $( ".dustpic" ).attr('src','img/empty-trash.png' );
+        $( ".dustcolor" ).css('background-color','#ffffff');
+    }
+});
+</script>
+<script>
+firebase.database().ref('bulb/power/').on('value', function(snapshot) {
+
+ $( ".bulbpower" ).attr('value', snapshot.val()*1000);
+$(".smartvalue").attr('value',$(".smartvalue").val()+(snapshot.val()*1000));    
+if(snapshot.val()>0.006)
+{ 
+    $( ".bulbcol" ).css('background-color','#ff0000');}
+    else if(snapshot.val() <0.002)
+    {
+         $( ".bulbcol" ).css('background-color','#ffff00');
+    }else
+    { $( ".bulbcol" ).css('background-color','#03fd33');
+    
+}       
+});
+firebase.database().ref('bulb/status/').on('value', function(snapshot) {
+if(snapshot.val()==1){
+ $( ".bulbstatus" ).css('background-color','#b1ff00');}
+    else{
+         $( ".bulbstatus" ).css('background-color','#000000');
+    }
+});    
+</script>    
+  <script>
+firebase.database().ref('fan/power/').on('value', function(snapshot) {
+
+ $( ".fanpower" ).attr('value', snapshot.val());
+$(".smartvalue").attr('value',$(".smartvalue").val()+(snapshot.val()*1000))  
+
+});
+firebase.database().ref('fan/status/').on('value', function(snapshot) {
+if(snapshot.val()==1){
+ $( ".fanstatus" ).css('background-color','#b1ff00');}
+    else{
+         $( ".fanstatus" ).css('background-color','#000000');
+    }
+});    
+</script>  
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <script>
+var Menu = {
+  
+  el: {
+    ham: $('.menu'),
+    menuTop: $('.menu-top'),
+    menuMiddle: $('.menu-middle'),
+    menuBottom: $('.menu-bottom')
+  },
+  
+  init: function() {
+    Menu.bindUIactions();
+  },
+  
+  bindUIactions: function() {
+    Menu.el.ham
+        .on(
+          'click',
+        function(event) {
+        Menu.activateMenu(event);
+        event.preventDefault();
+      }
+    );
+  },
+  
+  activateMenu: function() {
+    Menu.el.menuTop.toggleClass('menu-top-click');
+    Menu.el.menuMiddle.toggleClass('menu-middle-click');
+    Menu.el.menuBottom.toggleClass('menu-bottom-click'); 
+  }
+};
+
+Menu.init();    
+</script>
+   <script>
+window.onload = function () {
+
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartContainer", {
+	title :{
+		text: "Power Usage, 2018"
+	},
+	axisY: {
+		includeZero: false
+	},      
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}]
+});
+
+var xVal = 0;
+var yVal = 100; 
+var updateInterval = 1000;
+var dataLength = 20; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+	count = count || 1;
+
+	for (var j = 0; j < count; j++) {
+		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+		dps.push({
+			x: xVal,
+			y: yVal
+		});
+		xVal++;
+	}
+
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
+
+	chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+
+}
+  </script>
+  <script>
+      
+var map;
+
+            function initMap() {
+                var geocoder = new google.maps.Geocoder();
+          
+
+              if (navigator.geolocation) {
+     $('#sub').click(function(){    
+var address ="vellore";
+                   
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+if (status == google.maps.GeocoderStatus.OK) {
+     var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+ console.log(longitude);
+var myLocation = {
+                      lat: results[0].geometry.location.lat(),
+                      lng: longitude
+                    };
+                    setPos(myLocation);
+          
+    
+    
+    
+            function setPos(myLocation) {
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: myLocation,
+                zoom: 10
+              });
+
+              var service = new google.maps.places.PlacesService(map);
+              service.nearbySearch({
+                location: myLocation,
+                radius: 4000,
+                types: ['house']
+              }, processResults);
+
+            }
+
+            function processResults(results, status, pagination) {
+              if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                return;
+              } else {
+                createMarkers(results);
+
+              }
+            }
+
+            function createMarkers(places) {
+              var bounds = new google.maps.LatLngBounds();
+              var placesList = document.getElementById('places');
+
+              for (var i = 0, place; place = places[i]; i++) {
+                var image = {
+                  url: place.icon,
+                  size: new google.maps.Size(71, 71),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(17, 34),
+                  scaledSize: new google.maps.Size(25, 25)
+                };
+
+                var marker = new google.maps.Marker({
+                  map: map,
+                  icon: image,
+                  title: place.name,
+                  animation: google.maps.Animation.DROP,
+                  position: place.geometry.location
+                });
+
+                bounds.extend(place.geometry.location);
+              }
+              map.fitBounds(bounds);
+            }
+    
+    
+                } 
+    } );
+
+            });  } 
+            }
+ 
+        
+    </script>
+   
+        <script>
+    
+$.getJSON("/others/file.json", function(json) {
+    var s= "";
+    var main=""; 
+    var arsenic;
+    var fluoride;
+    var iron;
+    var salinity;
+    var nitrate;
+    var change;
+    
+    for (district in json) {
+        s="Problems in  "+district+"<br/>";
+  for (block in json[district]) {
+       s=s+"Block name: "+block+"<br/>";
+      for(panchayat in json[district][block])
+      {   s=s+"Panchayat name: "+panchayat+"<br/>";
+          for(village in json[district][block][panchayat]){
+               s=s+"Village name: "+village+"<br/>";
+          for(habitation in json[district][block][panchayat][village ]){  
+              s=s+"Habitation name: "+habitation+"<br/>Chemical Level <br/>";
+              change=0;
+
+                   arsenic= json[district][block][panchayat][village ][habitation].arsenic;
+                   iron= json[district][block][panchayat][village ][habitation].iron;
+                   fluoride= json[district][block][panchayat][village ][habitation].fluoride;
+                   salinity= json[district][block][panchayat][village ][habitation].salinity;
+                   nitrate= json[district][block][panchayat][village ][habitation].nitrate;
+              
+              if(arsenic!== undefined){
+
+
+                   if(arsenic.actual > arsenic.permissable)
+                       {
+                           s=s+"<br/>Arsenic level in danger by "+(arsenic.actual- arsenic.permissable)+ "difference";
+                           change=1;
+                       }
+          }
+              if(fluoride!== undefined){
+                   if(fluoride.actual > fluoride.permissable)
+                       {
+                           s=s+"<br/>Fluoride level in danger by "+(fluoride.actual- fluoride.permissable)+ "difference";
+                           change=1;
+                       }
+              }
+              if(iron!== undefined){
+                   if(iron.actual > iron.permissable)
+                       {
+                           s=s+"<br/>Iron level in danger by "+(iron.actual- iron.permissable)+ "difference";
+                           change=1;
+                       }
+              }
+              if(salinity!== undefined){
+              
+                   if(salinity.actual > salinity.permissable)
+                       {
+                           s=s+"<br/>Salinity level in danger by "+(salinity.actual- salinity.permissable)+ "difference";
+                           change=1;
+                       }}
+              if(nitrate!== undefined){
+                   if(nitrate.actual > nitrate.permissable)
+                       {
+                           s=s+"<br/>Nitrate level in danger by "+(nitrate.actual- nitrate.permissable)+ "difference";
+                           change=1;
+                       }
+              }
+                   if(change==0){
+                       s=s+"All level of chemical is fine";
+                   }
+                 
+               main=main+"<br/>"+s+"<br/><br/> ";
+                s="";
+          }
+          
+      }
+        }
+    
+  }
+}
+    document.getElementById('message').innerHTML=main;
+     console.log(main); 
+    console.log(s); // this will show the info in firebug console 
+  
+});</script> 
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
+     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHcC4BG4N6_Cd0lD2FXQG0ADIUrP2AOq0&signed_in=true&libraries=places&callback=initMap" async defer></script>
+ 
+
+  
+<script>
+var mySidebar = document.getElementById("mySidebar");
+function anz_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+function anz_close() {
+mySidebar.style.display = "none";
+}
+</script>    
+
+ <script>
+$("#sub").click(function() {
+$("#splash").addClass("anz-opacity").delay(800).fadeOut( "slow")
+$(".barr").css("display", "block");    
+
+});   
+</script> 
+
+ 
+    
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+  "appliances" : {
+    "bulb" : {
+      "power" : 0,
+      "status" : 1
+    },
+    "fan" : {
+      "power" : 0,
+      "status" : 0
+    }
+  },
+  "bulb" : {
+    "status" : 1
+  },
+  "dustbin" : "0",
+  "neural_net_res" : "INTRUDER"
+}
